@@ -15,8 +15,10 @@
   <tr>
     <td><img src="<%= product.image %>" class="img-responsive" alt="Responsive image"></td>
     <td><%= link_to product.name, "/products/#{product.id}" %></td>
-    <td><%= product.price %></td>
+    <td><%= product.total_price %></td>
+    <td><%= product.sale_message %></td>
     <td><%= product.description%></td>
+    <td> Unjust government regulated tax<%= product.tax%></td>
     <td><%= link_to "show me", "/products/#{product.id}" %></td>
     <td><%= link_to "Edit", "/products/#{product.id}/edit" %></td>
     <td><%= link_to "Delete", "/products/#{product.id}", method: :delete %></td>

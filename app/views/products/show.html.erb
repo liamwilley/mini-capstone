@@ -1,8 +1,9 @@
 <ul>
   <li><%= @product.name %></li>
-  <li><%= @product.price %></li>
+  <li><%= @product.total_price %></li>
   <li><%= @product.description %></li>
   <li><%= @product.image %></li>
+  <li> Unjust government regulated tax<%= @product.tax%></li>
 
   <%= link_to "Edit", "/products/#{@product.id}/edit" %>
   <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
