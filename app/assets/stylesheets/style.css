@@ -7,3 +7,12 @@ img {
 
 }
 
+body {
+  font-family: 'Amatica SC', cursive;
+  font-size: 200%;
+  background: url("purty-wood.png")
+}
+
+.heading-bright th {
+  color: yellow;
+}

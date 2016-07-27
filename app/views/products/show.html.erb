@@ -1,1 +1,16 @@
-<%= @product.name %>
+<ul>
+  <li><%= @product.name %></li>
+  <li><%= @product.price %></li>
+  <li><%= @product.description %></li>
+  <li><%= @product.image %></li>
+
+  <%= link_to "Edit", "/products/#{@product.id}/edit" %>
+  <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
+
+
+ <li><img src="<%= @product.image %>"></li>
+  </ul>
+  
+
+
+</ul>
