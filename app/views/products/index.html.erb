@@ -16,7 +16,12 @@
     <td><img src="<%= product.image %>" class="img-responsive" alt="Responsive image"></td>
     <td><%= link_to product.name, "/products/#{product.id}" %></td>
     <td><%= product.total_price %></td>
-    <td><%= product.sale_message %></td>
+    <% if product.sale_message == "Discount Item!" %>
+      <td class="sale_message"><%= product.sale_message %></td>
+    <% else %>
+      <td><%= product.sale_message %></td>
+    <% end %>
+
     <td><%= product.description%></td>
     <td> Unjust government regulated tax<%= product.tax%></td>
     <td><%= link_to "show me", "/products/#{product.id}" %></td>
