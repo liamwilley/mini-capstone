@@ -21,7 +21,7 @@
 
     <% end %>
 
-
+ 
     <nav class="navbar navbar-light bg-faded">
   <a class="navbar-brand" href="#">Liam's Fancy Store</a>
   <ul class="nav navbar-nav">
@@ -32,14 +32,15 @@
       <a class="nav-link" href="/">Products</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/products?sort_attribute=price">Price Filter</a>
+      <a class="nav-link" href="/products?sort_attribute=price">Price Filter, Ascending</a>
+     <!--  <a class="nav-link" href="/products?sort_attribute=price">Price Filter, Descending</a> -->
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/products/<%= Product.all.sample.id %>">Random Product</a>
+      <a class="nav-link" href="/products/<%= Product.all.sample.id %>">Random Product</a>  <!-- refactor to put logic in controller -->
     </li>
       </ul>
-      <%= form_tag "/products", method: :get do%>
-        <div>
+      <%= form_tag "/products", class: "navbar-form navbar-left", method: :get do%> <!-- refactored to be pretty, ask marks q's about divs -->
+        <div class="form-group">
         <%= label_tag :search %>
         <%= text_field_tag :search %>
         </div> 

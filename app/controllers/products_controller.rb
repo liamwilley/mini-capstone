@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
       @products = Product.order(:price)
     elsif params[:search]
       @products = Product.all.where("name ILIKE ?", "%#{params[:search]}%")  
+    # elsif params[:discount]
+    #   @products = Product.where("price < ?", 15)
     else 
       @products = Product.all
     end
@@ -18,6 +20,9 @@ class ProductsController < ApplicationController
   end
 
   def show
+    # if params[:id] == "random"
+    #   @product = Product.all.sample
+    # else
     @product = Product.find(params[:id])
   end
 
