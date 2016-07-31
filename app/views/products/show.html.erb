@@ -4,6 +4,7 @@
   <li><%= @product.description %></li>
   <li><%= @product.image %></li>
   <li> Unjust government regulated tax<%= @product.tax%></li>
+  <li><%= @product.status %></li>
 
   <%= link_to "Edit", "/products/#{@product.id}/edit" %>
   <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>

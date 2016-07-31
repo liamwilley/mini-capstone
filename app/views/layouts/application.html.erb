@@ -26,22 +26,26 @@
   <a class="navbar-brand" href="#">Liam's Fancy Store</a>
   <ul class="nav navbar-nav">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Products</a>
+      <a class="nav-link" href="/">Products</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Contributors</a>
+      <a class="nav-link" href="/products?sort_attribute=price">Price Filter</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">About</a>
+      <a class="nav-link" href="/products/<%= Product.all.sample.id %>">Random Product</a>
     </li>
-  </ul>
-  <form class="form-inline pull-xs-right">
-    <input class="form-control" type="text" placeholder="Search">
-    <button class="btn btn-success-outline" type="submit">Search</button>
-  </form>
+      </ul>
+      <%= form_tag "/products", method: :get do%>
+        <div>
+        <%= label_tag :search %>
+        <%= text_field_tag :search %>
+        </div> 
+        <%= submit_tag "FIND PRODUCT!" %>
+        </div>
+    <% end %>
 </nav>
 
     <div class="container"> 
