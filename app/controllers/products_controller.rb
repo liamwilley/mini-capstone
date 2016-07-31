@@ -4,8 +4,7 @@ class ProductsController < ApplicationController
     if params[:sort_attribute]
       @products = Product.order(:price)
     elsif params[:search]
-      @products = Product.all.where("name ILIKE ?", "%#{params[:search]}%")
-      
+      @products = Product.all.where("name ILIKE ?", "%#{params[:search]}%")  
     else 
       @products = Product.all
     end
