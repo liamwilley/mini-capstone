@@ -52,9 +52,10 @@ class ProductsController < ApplicationController
     description = params[:description]
     image = params[:image]
     product = Product.new(name: name, price: price, description: description, image: image)
-    product.save
+    if product.save
     flash[:success] = "Product Created!"
     redirect_to "/products"
+    end
   end
     # name = params[:name]
     # price = params[:price]
