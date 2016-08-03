@@ -74,6 +74,8 @@ class ProductsController < ApplicationController
     redirect_to "/products"
   end
 
+
+
 end
 
 
