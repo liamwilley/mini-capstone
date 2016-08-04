@@ -17,7 +17,7 @@
   <%= label_tag :image, "Image URL" %>
   <%= text_field_tag :image %>
   <div class="form-group">
-    <%= collection_select :supplier, :supplier_id, Supplier.all, :id, : %>
+    <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name %>
   </div>
   </div>
   <%= submit_tag "Create Product" %>

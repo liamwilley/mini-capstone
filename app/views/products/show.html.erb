@@ -13,7 +13,16 @@
  <li>
  
  </li>
-  
-
 
 </ul>
+
+<%= form_tag '/orders', method: :post do %>
+  <div>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity %>
+    
+  </div>
+
+  <%= sumbit_tag "Buy Now!" %>
+
+<% end %>
