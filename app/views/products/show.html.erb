@@ -20,8 +20,8 @@
   <div>
     <%= label_tag :quantity %>
     <%= text_field_tag :quantity %>
-    
   </div>
+  <%= hidden_field_tag :product_id, @product.id %>
 
   <%= sumbit_tag "Buy Now!" %>
 

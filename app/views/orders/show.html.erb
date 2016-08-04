@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <ul class="info-background">
+        <li>Order #:<%= @order.id %></li>        
+        <li>Ordered At #:<%= @order.created_at %></li>        
+        <li>Product Name: <%= @order.name %></li>        
+        <li>Quantity: <%= @order.quantity %></li>        
+        <li>Subtotal: <%= number_to_currency(@order.subtotal) %></li>        
+        <li>Tax: <%= number_to_currency(@order.tax) %></li>        
+        <li>Total: <%= number_to_currency(@order.total) %></li>        
+        <li>Ordered By: <%= @order.user.name %></li>        
+        <li>Email: <%= @order.user.email %></li>        
+      </ul>
+      
+    </div>
+    <div class="col-md-4">
+      <img src="<%= @order.product.images.first.url %>">
+    </div>
+</div>
+
+
+<ul>
+  <li>name: <%= @product.name %></li>
+  <li>price: <%= @product.total_price %></li>
+  <li>description: <%= @product.description %></li>
+  <li>image: <%= @product.image %></li>
+  <li> Unjust government regulated tax: <%= @product.tax%></li>
+  <li>Supplier: <%= @product.supplier.name %></li>
+
+  <%= link_to "Edit", "/products/#{@product.id}/edit" %>
+  <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
+
+
+ <li>
+ 
+ </li>
+
+</ul>
+
+<%= form_tag '/orders', method: :post do %>
+  <div>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity %>
+  </div>
+  <div>
+    <%= label_tag :product_id %>
+    <%= text_field_tag :product_id %>
+  </div>
+
+  <%= sumbit_tag "Buy Now!" %>
+
+<% end %>
