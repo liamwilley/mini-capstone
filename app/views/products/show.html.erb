@@ -5,6 +5,14 @@
   <li>image: <%= @product.image %></li>
   <li> Unjust government regulated tax: <%= @product.tax%></li>
   <li>Supplier: <%= @product.supplier.name %></li>
+  <li>Categories:
+    <ul>
+      
+        <% @product.categories.each do |category| %>
+        <li><%= category.name %></li>
+        <% end %>
+    </ul>
+  </li>
 
   <%= link_to "Edit", "/products/#{@product.id}/edit" %>
   <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
@@ -23,6 +31,6 @@
   </div>
   <%= hidden_field_tag :product_id, @product.id %>
 
-  <%= sumbit_tag "Buy Now!" %>
+  <%= submit_tag "Buy Now!" %>
 
 <% end %>

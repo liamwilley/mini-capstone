@@ -5,8 +5,10 @@ class ProductsController < ApplicationController
       @products = Product.order(:price)
     elsif params[:search]
       @products = Product.all.where("name ILIKE ?", "%#{params[:search]}%")  
-    # elsif params[:discount]
-    #   @products = Product.where("price < ?", 15)
+    elsif params[:discount]
+      @products = Product.where("price < ?", 15)
+    elsif params[:category_id]
+      @products = Category.find_by(id: params[:category_id]).products
     else 
       @products = Product.all
     end
@@ -20,10 +22,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    # if params[:id] == "random"
-    #   @product = Product.all.sample
-    # else
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
     @product = Product.find(params[:id])
+    end
   end
 
   def new
@@ -51,10 +54,14 @@ class ProductsController < ApplicationController
     price = params[:price]
     description = params[:description]
     image = params[:image]
-    product = Product.new(name: name, price: price, description: description, image: image)
-    if product.save
-    flash[:success] = "Product Created!"
-    redirect_to "/products"
+    supplier_id = params[:supplier][:supplier_id]
+    @product = Product.new(name: name, price: price, description: description, image: image, supplier_id: supplier_id)
+    if @product.save
+      flash[:success] = "Product Created!"
+      redirect_to "/products"
+    else
+      flash[:danger] = "Product not created!"
+      redirect_to "/products/new"
     end
   end
     # name = params[:name]
@@ -74,24 +81,4 @@ class ProductsController < ApplicationController
     redirect_to "/products"
   end
 
-
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
