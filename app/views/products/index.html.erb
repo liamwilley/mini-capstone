@@ -1,4 +1,7 @@
 <h1>Product's Available:</h1>
+<% if current_user && current_user.admin %>
+  <p><%= link_to "Add Product", "/products/new" %></p>
+<% end %>
 
 <table class="table table-hover">
   <tr class="heading-bright">
@@ -11,7 +14,7 @@
     <th>Show Product</th>
   </tr>
 
-  <% @products.each do |product| %>
+  <% @products.each do |product| %> 
   <tr>
     <td><img src="<%= product.image %>" class="img-responsive" alt="Responsive image"></td>
     <td><%= link_to product.name, "/products/#{product.id}" %></td>

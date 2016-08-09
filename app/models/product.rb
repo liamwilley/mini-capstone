@@ -2,9 +2,15 @@ class Product < ApplicationRecord
   
   belongs_to :supplier
   has_many :images
-  has_many :orders
   has_many :categorized_products
   has_many :categories, through: :categorized_products
+  
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+  
+  validates :name, :description, :price, presence: true
+  validates :price, numericality: {greater_than: 0}
+
 
   TAX = 0.09
 

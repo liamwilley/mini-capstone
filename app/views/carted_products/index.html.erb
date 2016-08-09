@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+    <table class="table info-background">
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price Per Product</th>
+      </tr>
+        <% @order.carted_products.each do |carted_product| %>
+        <tr>
+          <td><%= carted_product.product.name %></td>
+          <td><%= carted_product.quantity %></td>
+          <td><%= number_to_currency(carted_product.product.price) %></td>
+          <td><%= link_to "Remove Product(s0", "/carted_products/#{}" %></td>
+        </tr>
+        <% end %>
+    </table>
+    <%= link_to "Confirm and Buy", "orders/#{@order.id}" %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<table class="table table-hover">
+  <tr class="heading-bright">
+    <th>Image</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Tax</th>
+  </tr>
+  <% @carted_products.each do |carted_product| %>
+  <tr>
+    <td>
+    <img src=<%= carted_product.product.image %> />
+      
+    </td>
+    <td><%= carted_product.product.name %></td>
+    <td><%= carted_product.product.price %></td>
+    <td><%= carted_product.product.tax %></td>
+  </tr>
+  <% end %>
+  </table>

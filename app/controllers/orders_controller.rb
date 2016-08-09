@@ -1,24 +1,22 @@
 class OrdersController < ApplicationController
 
-  def create
-    quantity = params[:quantity].to_i
-    product = Product.find_by(id: params[:product_id])
-    subtotal = product.price * quantity
-    tax = product.tax * quantity
-    total = subtotal + tax
+  def update
+    order = Order.find_by(id: params[:id])
 
-    order = Order.new(quantity: quantity, product_id: product_id, user_id: current_user.id, subtotal: subtotal, tax: tax, total: total)
-    if order.save
-      flash[:success] = "Order created!"
-      redirect_to "/orders/#{order.id}"
-    else
-      flash[:danger] = "Order not completed. You're not cool enough."
-      redirect_to = "/products/#{product.id}"
-
+    total_tax = 0
+    total_subtotal = 0
+    order.carted_products.each do |carted_product|
+      total_subtotal += (carted_product.product.price * carted_product.quantity)
+      total_tax += (carted_product.tax * carted_product.quantity)
+    end
+    total = total_subtotal + total_tax
+    order.assign_attributes(completed: true, tax: total_tax, subtotal: total_subtotal, total: total)
+    order.save
+    redirect_to "/orders/#{order.id}"
+    
   end
-
   def show
-    order = Order.find_by
+    order = Order.find_by(id: params[:id])
   end
 
 end

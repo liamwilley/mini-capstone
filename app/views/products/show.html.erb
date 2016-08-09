@@ -5,17 +5,18 @@
   <li>image: <%= @product.image %></li>
   <li> Unjust government regulated tax: <%= @product.tax%></li>
   <li>Supplier: <%= @product.supplier.name %></li>
-  <li>Categories:
-    <ul>
-      
-        <% @product.categories.each do |category| %>
-        <li><%= category.name %></li>
+  <li>C ategories:
+    <ul><% @product.categories.each do |category| %>
+        <li><%= category.name.capitalize %></li>
         <% end %>
     </ul>
   </li>
 
+  <% if current_user && current_user.admin %>
   <%= link_to "Edit", "/products/#{@product.id}/edit" %>
   <%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
+  <%= link_to "Add Image", "/products/#{@product.id}", method: :delete %>
+  <% end %> 
 
 
  <li>
@@ -23,14 +24,16 @@
  </li>
 
 </ul>
-
-<%= form_tag '/orders', method: :post do %>
+<% if current_user %>
+<%= form_tag '/carted_products', method: :post do %>
   <div>
     <%= label_tag :quantity %>
     <%= text_field_tag :quantity %>
   </div>
   <%= hidden_field_tag :product_id, @product.id %>
 
-  <%= submit_tag "Buy Now!" %>
-
+  <%= submit_tag "Add To Cart!" %>
+<% end %>
+<% else %>
+  <p>Sign up to purchase products!</p>
 <% end %>

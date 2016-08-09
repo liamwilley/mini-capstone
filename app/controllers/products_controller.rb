@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show, :search]
 
   def index
     if params[:sort_attribute]
@@ -25,16 +26,16 @@ class ProductsController < ApplicationController
     if params[:id] == "random"
       @product = Product.all.sample
     else
-    @product = Product.find(params[:id])
+      @product = Product.find(params[:id])
     end
   end
 
   def new
-
+    @product = Product.new
   end
 
   def edit
-    id = params[:id]
+    @product = Product.find_by(id: params[:id])  
   end
 
   def update
@@ -42,11 +43,14 @@ class ProductsController < ApplicationController
     product.name = params[:name]
     product.price = params[:price]
     product.description = params[:description]
-    product.image = params[:image]
     product.assign_attributes({name: params[:name], price: params[:price], description: params[:description], image: params[:image]})
-    product.save
-    flash[:success] = "Product Updated!"
-    redirect_to "/products"
+    if product.save
+      flash[:success] = "Product Updated!"
+      redirect_to "/products/#{product.id}"  
+    else
+      flash[:danger] = "Product Not Updated!"
+      render :edit
+    end
   end
 
   def create
@@ -56,13 +60,13 @@ class ProductsController < ApplicationController
     image = params[:image]
     supplier_id = params[:supplier][:supplier_id]
     @product = Product.new(name: name, price: price, description: description, image: image, supplier_id: supplier_id)
-    if @product.save
-      flash[:success] = "Product Created!"
-      redirect_to "/products"
-    else
-      flash[:danger] = "Product not created!"
-      redirect_to "/products/new"
-    end
+      if @product.save
+        flash[:success] = "Product Created!"
+        redirect_to "/products"
+      else
+        flash[:danger] = "Product not created!"
+        render :new
+      end
   end
     # name = params[:name]
     # price = params[:price]

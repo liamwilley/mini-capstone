@@ -1,17 +1,20 @@
 <div class="row">
   <div class="col-md-2"></div>
     <div class="col-md-4">
-      <ul class="info-background">
-        <li>Order #:<%= @order.id %></li>        
-        <li>Ordered At #:<%= @order.created_at %></li>        
-        <li>Product Name: <%= @order.name %></li>        
-        <li>Quantity: <%= @order.quantity %></li>        
-        <li>Subtotal: <%= number_to_currency(@order.subtotal) %></li>        
-        <li>Tax: <%= number_to_currency(@order.tax) %></li>        
-        <li>Total: <%= number_to_currency(@order.total) %></li>        
-        <li>Ordered By: <%= @order.user.name %></li>        
-        <li>Email: <%= @order.user.email %></li>        
-      </ul>
+     <table class="table info-background">
+       <tr>
+         <th>Product</th>
+         <th>Quantity</th>
+         <th>Price Per Product</th>
+       </tr>
+       <% @order.carted_products.each do |carted_product| %>
+        <tr>
+          <td><%carted_product.product.name %></td>
+          <td src=""><%carted_product.product.images.first.all if carted_product.product.image.any? %></td>
+          <td><%carted_product.product.quantity %></td>
+          <td><%carted_product.product.price %></td>
+        </tr>
+     </table>
       
     </div>
     <div class="col-md-4">
