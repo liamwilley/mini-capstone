@@ -34,8 +34,6 @@ class CartedProductsController < ApplicationController
     else
       redirect_to "/login"
     end 
-
-
   end
 
   def index
@@ -56,6 +54,7 @@ class CartedProductsController < ApplicationController
   def destroy
     carted_product = CartedProduct.find_by(id: params[:id]).destroy
     flash[:warning] = "You removed #{carted_product.product.name}"
+    session[:cart_count] = nil
     redirect_to "/carted_products"
   end
 

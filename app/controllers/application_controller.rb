@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :human_date_and_time  #can only be called in views and controllers - not models
+  before_action :count_carted_products
 
 
   def current_user
@@ -26,4 +27,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def count_carted_products
+    if current_user && current_user.orders.find_by(completed: false)
+      if session[:cart_count]
+        @cart_count = session[:cart_count]
+      else
+        @total_carted_products = 0
+        current_user.orders.find_by(completed: false).carted_products.each do |carted_product|
+        @cart_count += carted_products.quantity
+      end
+      session[:cart_count] = @cart_count
+    end
+  end
 end
